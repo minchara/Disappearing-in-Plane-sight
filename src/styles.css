@@ -1,0 +1,218 @@
+:root {
+  color: #202b38;
+  background: #f5eedf;
+  font-family: "Segoe Print", "Comic Sans MS", "Trebuchet MS", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --ink: #202b38;
+  --paper: #fffdf5;
+  --teal: #b7e9df;
+  --coral: #ffb8a9;
+  --blue: #b9d6f2;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #f5eedf;
+  background-image: radial-gradient(#d5cbbb 1px, transparent 1px), linear-gradient(90deg, transparent 0 98%, #e9dfce 98% 100%);
+  background-size: 19px 19px, 100% 100%;
+}
+button, select { font: inherit; }
+button { color: inherit; cursor: pointer; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+
+.app-shell { min-height: 100vh; display: grid; place-items: center; padding: 24px 14px; }
+.popup-shell {
+  width: min(100%, 430px);
+  padding: 19px;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 23px 18px 25px 17px / 19px 25px 16px 23px;
+  box-shadow: 7px 7px 0 var(--ink);
+}
+.popup-shell::before {
+  content: "";
+  position: absolute;
+  width: 73px;
+  height: 20px;
+  top: -8px;
+  right: 28px;
+  transform: rotate(4deg);
+  border: 2px solid #d9c978;
+  border-bottom: 0;
+  border-radius: 50% 35% 0 0;
+  opacity: .65;
+  pointer-events: none;
+}
+.app-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.header-doodle {
+  display: grid;
+  place-items: center;
+  flex: 0 0 43px;
+  width: 43px;
+  height: 43px;
+  font: 27px/1 "Comic Sans MS", cursive;
+  color: #f07d65;
+  border: 2px solid var(--ink);
+  border-radius: 48% 52% 43% 57%;
+  transform: rotate(-8deg);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.title-block { min-width: 0; flex: 1; }
+.eyebrow { display: block; margin-bottom: 2px; color: #63857e; font: 700 8px/1.4 "Trebuchet MS", sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+h1 { margin: 0; font: 700 18px/1.12 "Segoe Print", "Comic Sans MS", cursive; letter-spacing: -.04em; }
+h1 em { display: block; color: #eb755f; font-style: normal; }
+.camera-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  border: 1.5px solid var(--ink);
+  border-radius: 9px 7px 10px 7px;
+  color: #65717a;
+  font: 700 8px "Trebuchet MS", sans-serif;
+  letter-spacing: .08em;
+  transform: rotate(2deg);
+}
+.camera-state i, .live-label i { width: 7px; height: 7px; display: inline-block; border-radius: 50%; background: #aab0b5; }
+.camera-state.camera-on { background: #d9f2e9; color: #2f6959; }
+.camera-state.camera-on i, .live-label i { background: #4fc39e; }
+
+.preview-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #151e29;
+  border: 2px solid var(--ink);
+  border-radius: 15px 12px 17px 13px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.source-video, .main-canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.source-video { opacity: 0; pointer-events: none; }
+.main-canvas { background: #151e29; }
+.hidden-canvas { display: none; }
+.preview-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: #fff9e9;
+  background: radial-gradient(ellipse at 50% 42%, #2f4652, #17232c 72%);
+  text-align: center;
+}
+.placeholder-doodle { color: #ffe48a; font: 30px/1 "Comic Sans MS", cursive; transform: rotate(12deg); }
+.preview-placeholder p { margin: 2px 0 7px; font: 12px "Segoe Print", cursive; }
+.live-label {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  color: white;
+  background: #17232cc9;
+  border: 1px solid #ffffff80;
+  border-radius: 8px 7px 9px 6px;
+  font: 700 8px "Trebuchet MS", sans-serif;
+  letter-spacing: .1em;
+}
+.live-label.invisible-label { color: #253c36; background: #d9f2e9ed; border-color: #497d6d; }
+.live-label.invisible-label i { background: #f07d65; }
+
+.camera-actions { display: flex; gap: 8px; margin-top: 13px; }
+.scribble-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 8px 11px;
+  border: 1.7px solid var(--ink);
+  border-radius: 10px 8px 11px 7px;
+  font: 700 10px "Trebuchet MS", sans-serif;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform .12s, box-shadow .12s;
+}
+.scribble-button:hover:not(:disabled) { transform: translate(-1px, -1px) rotate(-.5deg); box-shadow: 3px 3px 0 var(--ink); }
+.scribble-button:active:not(:disabled) { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
+.secondary-button { background: #fffdf5; }
+.capture-button { flex: 1; background: var(--teal); }
+.camera-select { max-width: 100px; min-width: 60px; padding: 5px; border: 1.5px solid var(--ink); border-radius: 8px; background: white; font-size: 9px; }
+.helper-note { min-height: 25px; display: flex; align-items: flex-start; gap: 7px; margin: 12px 1px 10px; color: #596772; font: 10px/1.5 "Trebuchet MS", sans-serif; }
+.helper-note span { color: #e77963; font: 700 15px/1 "Comic Sans MS", cursive; }
+.ready-note { color: #34705f; }
+
+.gesture-guide { padding-top: 11px; border-top: 1.5px dashed #c8bfad; }
+.guide-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.guide-heading h2 { position: relative; margin: 0; font: 700 15px "Segoe Print", "Comic Sans MS", cursive; }
+.guide-heading h2::after { content: ""; position: absolute; height: 3px; left: 0; right: 4px; bottom: -4px; border-bottom: 2px solid #ef9b85; border-radius: 50%; transform: rotate(-1.5deg); }
+.listening-state { padding: 4px 7px; color: #77817f; background: #f1ecdf; border-radius: 8px 6px 9px 7px; font: 700 8px "Trebuchet MS", sans-serif; }
+.listening-state.is-listening { color: #39745f; background: #dcf2e8; }
+.detected-gesture { display: flex; align-items: center; gap: 6px; margin: 12px 0 9px; color: #5c6870; font: 9px "Trebuchet MS", sans-serif; }
+.detected-gesture svg { color: #6a8ca5; }
+.detected-gesture strong { color: var(--ink); }
+.gesture-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.gesture-card {
+  min-height: 94px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 7px 4px;
+  background: #fff9e9;
+  border: 1.4px solid var(--ink);
+  border-radius: 12px 9px 13px 8px;
+  text-align: center;
+  transform: rotate(-.5deg);
+}
+.gesture-card:nth-child(2) { background: #f0f7fc; transform: rotate(.7deg); }
+.gesture-card:nth-child(3) { background: #fff1eb; transform: rotate(-.3deg); }
+.gesture-card.gesture-active { outline: 2px dashed #e78167; outline-offset: 2px; }
+.gesture-doodle { font: 27px/1.15 "Segoe UI Emoji", sans-serif; }
+.gesture-card strong { font: 700 9px "Trebuchet MS", sans-serif; }
+.gesture-card small { color: #63717a; font: 8px "Trebuchet MS", sans-serif; }
+.guide-tip { display: flex; align-items: center; gap: 5px; margin: 10px 0 0; color: #758078; font: 9px "Trebuchet MS", sans-serif; }
+.privacy-scribble { margin-top: 14px; padding-top: 9px; border-top: 1px solid #ebe2d2; color: #7a817e; text-align: center; font: 8px "Trebuchet MS", sans-serif; }
+.privacy-scribble span { color: #e77963; margin-right: 4px; }
+.creator-credit { margin-top: 8px; color: #e77963; text-align: center; font: 11px "Segoe Print", "Comic Sans MS", cursive; transform: rotate(-1deg); }
+.error-toast, .toast {
+  position: fixed;
+  z-index: 20;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100vw - 24px);
+  padding: 10px 12px;
+  color: #6f2721;
+  background: #ffe5df;
+  border: 1.5px solid var(--ink);
+  border-radius: 10px 8px 11px 7px;
+  box-shadow: 3px 3px 0 var(--ink);
+  font: 10px/1.4 "Trebuchet MS", sans-serif;
+}
+.error-toast button { display: grid; place-items: center; border: 0; background: transparent; }
+.toast { color: #285b4b; background: #ddf5e9; white-space: nowrap; }
+
+@media (max-width: 400px) {
+  .app-shell { padding: 12px 8px; }
+  .popup-shell { padding: 14px; box-shadow: 5px 5px 0 var(--ink); }
+  h1 { font-size: 16px; }
+  .gesture-grid { gap: 6px; }
+  .gesture-card { min-height: 88px; }
+  .gesture-card strong { font-size: 8px; }
+}

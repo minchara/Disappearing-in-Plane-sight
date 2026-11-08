@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Disappearing in Plain Sight",
+  "version": "1.0.0",
+  "description": "A scribble-themed, gesture-controlled invisibility camera.",
+  "action": {
+    "default_title": "Disappearing in Plain Sight",
+    "default_popup": "index.html"
+  }
+}

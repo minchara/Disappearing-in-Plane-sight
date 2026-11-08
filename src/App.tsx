@@ -2,9 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Camera, Check, CircleHelp, Hand, RotateCcw, Square, X } from 'lucide-react'
 import { FilesetResolver, ImageSegmenter, GestureRecognizer } from '@mediapipe/tasks-vision'
 
-const WASM = '/mediapipe/wasm'
-const SEGMENT_MODEL = '/models/selfie_segmenter.tflite'
-const GESTURE_MODEL = '/models/gesture_recognizer.task'
+const WASM = `${import.meta.env.BASE_URL}mediapipe/wasm`
+const SEGMENT_MODEL = `${import.meta.env.BASE_URL}models/selfie_segmenter.tflite`
+const GESTURE_MODEL = `${import.meta.env.BASE_URL}models/gesture_recognizer.task`
 type Gesture = 'Open palm' | 'Closed fist' | 'Two fingers' | '—'
 
 export default function App() {

@@ -17,3 +17,7 @@ Keep the popup open while using the camera. Closing it ends the camera session.
 Run `npm run dev` and open the localhost address Vite prints. Camera access requires localhost or HTTPS and browser permission.
 
 The MediaPipe runtime and models are bundled under `public/`, so the effect does not depend on a remote model host.
+
+## Publish on GitHub Pages
+
+The repository includes a GitHub Actions workflow that builds the Vite app and deploys `dist` when `main` is updated. In **Settings → Pages**, set the publishing source to **GitHub Actions**. After the workflow succeeds, open `https://minchara.github.io/Disappearing-in-Plane-sight/`.
